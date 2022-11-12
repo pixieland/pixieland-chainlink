@@ -1,0 +1,52 @@
+{
+  "name": "pixieland-moralis",
+  "version": "0.1.0",
+  "private": true,
+  "dependencies": {
+    "@react-three/drei": "^9.40.0",
+    "@react-three/fiber": "^8.9.0",
+    "@react-three/flex": "^1.0.0",
+    "@react-three/postprocessing": "^2.7.0",
+    "@react-three/rapier": "^0.10.0",
+    "@testing-library/jest-dom": "^5.16.5",
+    "@testing-library/react": "^13.4.0",
+    "@testing-library/user-event": "^13.5.0",
+    "bootstrap": "^5.2.2",
+    "ethers": "^5.7.2",
+    "lamina": "^1.1.23",
+    "perlin.js": "^1.0.0",
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0",
+    "react-scripts": "5.0.1",
+    "three": "^0.146.0",
+    "three-custom-shader-material": "^4.0.0",
+    "three-noise": "1.1.2",
+    "uuid-by-string": "^4.0.0",
+    "web3modal": "^1.9.9",
+    "wouter": "^2.8.0-alpha.2"
+  },
+  "scripts": {
+    "start": "react-scripts start",
+    "build": "react-scripts build",
+    "test": "react-scripts test",
+    "eject": "react-scripts eject"
+  },
+  "eslintConfig": {
+    "extends": [
+      "react-app",
+      "react-app/jest"
+    ]
+  },
+  "browserslist": {
+    "production": [
+      ">0.2%",
+      "not dead",
+      "not op_mini all"
+    ],
+    "development": [
+      "last 1 chrome version",
+      "last 1 firefox version",
+      "last 1 safari version"
+    ]
+  }
+}
