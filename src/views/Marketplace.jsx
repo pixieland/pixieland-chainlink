@@ -6,6 +6,22 @@ export default function Marketplace({ ethaddress, contractNFT }) {
     "https://raw.githubusercontent.com/pixieland/pixieland-moralis/website/src/images/pixie1.png",
     "https://raw.githubusercontent.com/pixieland/pixieland-moralis/website/src/images/pixie2.png"
   ]);
+
+  // useEffect(() => {
+  //   const getNFTs = async () => {
+  //     try{
+       
+  //       const nft = await fetch(`https://api.covalenthq.com/v1/80001/address/${ethaddress}/balances_v2/?quote-currency=USD&format=JSON&nft=false&no-nft-fetch=false&key=`);
+  //       const { data } = await nft.json();
+  //       console.log(data)
+  //       //setPixies(data);
+  //     }
+  //     catch(err) {
+  //       console.error(err);
+  //     }
+  //   }
+  //   if(contractNFT) getNFTs();
+  // }, [contractNFT])
   
   const buyNFT = async (id) => {
     try{

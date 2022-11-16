@@ -4,6 +4,7 @@ import Navbar from "./components/layout/Navbar";
 import Landing from "./views/Landing";
 import Marketplace from './views/Marketplace';
 import GameStart from './views/GameStart';
+import AddPixie from './views/AddPixie';
 import Game from './components/three/Game';
 import React from 'react';
 import './App.css';
@@ -42,6 +43,15 @@ function App() {
               setETHAddress={setETHAddress}
               setEthProvider={setEthProvider} />
             <GameStart />
+          </>
+      </Route>
+      <Route path="/addpixie">
+        <>
+            <Navbar
+              ethaddress={ethaddress}
+              setETHAddress={setETHAddress}
+              setEthProvider={setEthProvider} />
+            <AddPixie />
           </>
       </Route>
       <Route path="/pixiland">
