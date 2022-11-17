@@ -10,7 +10,9 @@ export const pixis = [
   { image: "/img/nft/blue.png", color: "blue", hp: 10 },
   { image: "/img/nft/yellow.png", color: "yellow", hp: 20 },
   { image: "/img/nft/pink.png", color: "hotpink", hp: 50 },
-  { image: "/img/nft/oracle.png", color: "orange", hp: 100 }
+  { image: "/img/nft/oracle.png", color: "orange", hp: 100 },
+  { image: "/img/nft/turquoise.png", color: "turquoise", hp: 80 },
+  { image: "/img/nft/black.png", color: "black", hp: 1000 }
 ]
 
 export default function Pixi({ pixi: { image, color, hp }, ...props }) {

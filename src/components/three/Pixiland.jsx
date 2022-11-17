@@ -13,7 +13,7 @@ import ImageFrame from "./PictureFrame"
 Perlin.seed(Math.random())
 
 const SPEED = 18
-const COUNT = 20
+const COUNT = 10
 const frontVector = new THREE.Vector3()
 const sideVector = new THREE.Vector3()
 const rotation = new THREE.Vector3()
@@ -21,7 +21,7 @@ const lightgreen = new THREE.Color('lightgreen')
 const grassMaterial = new THREE.MeshBasicMaterial({ color: lightgreen })
 const grassGeometry = new THREE.ConeGeometry(0.05, 1.0, 2, 20, false, 0, Math.PI)
 
-const randomIndex = (items) => Math.floor(Math.random() * items.length - 1 | 0)
+const randomIndex = (items) => Math.floor(Math.random() * items.length | 0)
 
 export default function Game() {
     const [, setLocation] = useLocation()
@@ -45,12 +45,15 @@ export default function Game() {
                 <pointLight castShadow intensity={0.8} position={[100, 100, 100]} />
                 <Physics gravity={[0, -30, 0]} colliders={false}>
                     <Ground image={"/img/log.png"} />
-                    <Gallery radius={COUNT} items={levels.slice(0, COUNT)} onSelect={navigate} />
+                    <Gallery position={[0, 0, 50]} radius={COUNT} items={levels.slice(0, COUNT)} onSelect={navigate} />
+                    <Gallery position={[0, 0, -50]} radius={COUNT} items={levels.slice(COUNT, COUNT * 2)} onSelect={navigate} />
+                    <Gallery position={[-50, 0, 0]} radius={COUNT} items={levels.slice(COUNT * 2, COUNT * 3)} onSelect={navigate} />
+                    <Gallery position={[50, 0, 0]} radius={COUNT} items={levels.slice(COUNT * 3, COUNT * 4)} onSelect={navigate} />
                     <Player>
                         <Pixi />
                     </Player>
-                    <Crowd items={Array(100).fill(0).map(n => pixis[randomIndex(pixis)])} />
-                    <Swarm items={Array(200).fill(0).map(n => pixis[randomIndex(pixis)])} />
+                    <Crowd items={Array(200).fill(0).map(n => pixis[randomIndex(pixis)])} />
+                    <Swarm items={Array(100).fill(0).map(n => pixis[randomIndex(pixis)])} />
                 </Physics>
                 <PointerLockControls />
                 {/* <OrbitControls /> */}
@@ -71,7 +74,7 @@ export function Ground({ image, props }) {
             {/* <Grass> */}
             <mesh receiveShadow position={[0, 0, 0]} rotation-x={-Math.PI / 2}>
                 <planeGeometry args={[1000, 1000]} />
-                <meshStandardMaterial map={texture} map-repeat={[240, 240]} color="green" />
+                <meshStandardMaterial map={texture} map-repeat={[240, 240]} color="blue" />
             </mesh>
             {/* </Grass> */}
             <CuboidCollider args={[1000, 2, 1000]} position={[0, -2, 0]} />
@@ -84,14 +87,14 @@ export function Swarm({ width = 2000, height = 2000, children, count = 50, items
         <group {...props}>
             <mesh position={[0, 25, 0]}>
                 {items.map((item, i) => {
-                    const factor = Math.random() - 0.5
+                    let factor = Math.random() - 0.5
                     const position = item.position || [
                         factor * width,
                         1,
                         factor * width / 3
                     ]
-                    //const factor = Perlin.perlin3(position[0], position[1], position[2])
-                    return <Fly key={i} position={position} rotation={[0, position[0] > 0 ? Math.PI : 0, 0]} factor={factor}>
+                    factor = Perlin.perlin3(position[0], position[1], position[2])
+                    return <Fly key={i} position={position} rotation={[Math.PI * 2, position[0] > 0 ? Math.PI : 0, 0]} factor={factor}>
                         <Pixi {...item} />
                     </Fly>
                 })}
@@ -256,8 +259,9 @@ export function Player({ children }) {
         const { forward, backward, strafe_left, strafe_right, left, right, jump, fly } = get()
         const velocity = ref.current.linvel()
         const direction = camera.getWorldDirection(rotation)
+        const pos = ref.current.translation()
         // update camera
-        camera.position.set(...ref.current.translation())
+        camera.position.set(pos.x, pos.y+1.6, pos.z)
         // movement
         frontVector.set(0, 0, backward - forward)
         if (Math.abs(left - right)) {
