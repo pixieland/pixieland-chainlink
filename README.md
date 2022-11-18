@@ -19,8 +19,8 @@ We learned the value of teamwork and the hard technical skills of solidity as we
 ## What's next for 
 Next for Pixieland is to deploy on mainnet and make a better game mechanism. Fix the UI and make the pixies 3 dimensional as opposed to 2D.
  
-## Youtube Video: 
- 
+## Youtube Video: https://www.youtube.com/watch?v=3RqRpFD3bFY
+
 ## Live Website: https://pixieland.netlify.app/
 
 ## We used web3.storage to store the Pixie Imaged :  https://github.com/pixieland/pixieland-chainlink/blob/main/src/views/AddPixie.jsx#L20
