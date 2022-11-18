@@ -32,7 +32,8 @@ function App() {
         <Navbar
           ethaddress={ethaddress}
           setETHAddress={setETHAddress}
-          setEthProvider={setEthProvider} />
+          setEthProvider={setEthProvider}
+          setContractNFT={setContractNFT} />
           <Landing />
         </>
       </Route>
@@ -41,8 +42,9 @@ function App() {
             <Navbar
               ethaddress={ethaddress}
               setETHAddress={setETHAddress}
+              setContractNFT={setContractNFT}
               setEthProvider={setEthProvider} />
-            <GameStart />
+            <GameStart ethaddress={ethaddress} contractNFT={contractNFT} />
           </>
       </Route>
       <Route path="/addpixie">
@@ -50,8 +52,9 @@ function App() {
             <Navbar
               ethaddress={ethaddress}
               setETHAddress={setETHAddress}
+              setContractNFT={setContractNFT}
               setEthProvider={setEthProvider} />
-            <AddPixie />
+            <AddPixie contractNFT={contractNFT} />
           </>
       </Route>
       <Route path="/pixiland">

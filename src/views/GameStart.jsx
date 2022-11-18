@@ -8,16 +8,21 @@ export default function Marketplace({ ethaddress, contractNFT }) {
     "https://raw.githubusercontent.com/pixieland/pixieland-moralis/website/src/images/pixie2.png"
   ]);
   
-  const buyNFT = async (id) => {
-    try{
-      const transaction = await contractNFT.buyNFT(pixies[id], { value: ethers.utils.parseEther("0.00001"), gasLimit: 1e6});
-      const tx = await transaction.wait();
-      console.log(tx);
+  useEffect(() => {
+    const getNFTs = async () => {
+      try{
+        const name = await contractNFT.pixies_names(0);
+        console.log(name);
+
+        //setPixies(ps);
+      }
+      catch(err) {
+        console.error(err);
+      }
     }
-    catch(err) {
-      console.error(err);
-    }
-  }
+    if(contractNFT) getNFTs();
+  }, [contractNFT])
+
   return (
     <div className="container">
       <h1>Choose your Pixie</h1>

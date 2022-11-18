@@ -1,4 +1,4 @@
-export const CONTRACT_ADDRESS_PIXIENFT = "0x0A53B4218D45d3fE362F1D7c782DcAB40D42c9D8"
+export const CONTRACT_ADDRESS_PIXIENFT = "0xF26847ACb8772600bDaA3aF53A2056F7a42F5a96"
 export const PIXIENFT_ABI = [
 	{
 		"inputs": [],
@@ -122,6 +122,25 @@ export const PIXIENFT_ABI = [
 				"internalType": "contract PixieNFT",
 				"name": "",
 				"type": "address"
+			}
+		],
+		"stateMutability": "view",
+		"type": "function"
+	},
+	{
+		"inputs": [
+			{
+				"internalType": "uint256",
+				"name": "",
+				"type": "uint256"
+			}
+		],
+		"name": "pixies_names",
+		"outputs": [
+			{
+				"internalType": "string",
+				"name": "",
+				"type": "string"
 			}
 		],
 		"stateMutability": "view",

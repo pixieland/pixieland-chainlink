@@ -2,30 +2,26 @@ import React, { useEffect, useState } from 'react'
 import { ethers } from 'ethers'
 
 export default function Marketplace({ ethaddress, contractNFT }) {
-  const [pixies, setPixies] = useState([
-    "https://raw.githubusercontent.com/pixieland/pixieland-moralis/website/src/images/pixie1.png",
-    "https://raw.githubusercontent.com/pixieland/pixieland-moralis/website/src/images/pixie2.png"
-  ]);
+  const [pixies, setPixies] = useState([]);
 
-  // useEffect(() => {
-  //   const getNFTs = async () => {
-  //     try{
+  useEffect(() => {
+    const getNFTs = async () => {
+      try{
        
-  //       const nft = await fetch(`https://api.covalenthq.com/v1/80001/address/${ethaddress}/balances_v2/?quote-currency=USD&format=JSON&nft=false&no-nft-fetch=false&key=`);
-  //       const { data } = await nft.json();
-  //       console.log(data)
-  //       //setPixies(data);
-  //     }
-  //     catch(err) {
-  //       console.error(err);
-  //     }
-  //   }
-  //   if(contractNFT) getNFTs();
-  // }, [contractNFT])
+        const ps = await contractNFT.getUrlList();
+        console.log(ps);
+        setPixies(ps);
+      }
+      catch(err) {
+        console.error(err);
+      }
+    }
+    if(contractNFT) getNFTs();
+  }, [contractNFT])
   
-  const buyNFT = async (id) => {
+  const buyNFT = async (imageurl) => {
     try{
-      const transaction = await contractNFT.buyNFT(pixies[id], { value: ethers.utils.parseEther("0.00001"), gasLimit: 1e6});
+      const transaction = await contractNFT.buyNFT(imageurl, { value: ethers.utils.parseEther("0.00001"), gasLimit: 1e6});
       const tx = await transaction.wait();
       console.log(tx);
     }
@@ -44,8 +40,7 @@ export default function Marketplace({ ethaddress, contractNFT }) {
               <img src={p} className="card-img-top" alt="..." />
               <div className="card-body">
                 <h5 className="card-title">#{i + 1}</h5>
-                <p className="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-                <button className="btn btn-danger" onClick={() => buyNFT(i)}>
+                <button className="btn btn-danger" onClick={() => buyNFT(p)}>
                   Buy for 1 MATIC
                 </button>
               </div>

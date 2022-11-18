@@ -16,9 +16,9 @@ export default function Navbar({ ethaddress, setETHAddress, setEthProvider, setC
     const address = await signer.getAddress();
     setETHAddress(address);
 
-    const contractNFT = new ethers.Contract(CONTRACT_ADDRESS_PIXIENFT, PIXIENFT_ABI, signer);
-    console.log(contractNFT)
-    setContractNFT(contractNFT);
+    const contract = new ethers.Contract(CONTRACT_ADDRESS_PIXIENFT, PIXIENFT_ABI, signer);
+    console.log(contract)
+    setContractNFT(contract);
   }
 
   return (
@@ -40,7 +40,7 @@ export default function Navbar({ ethaddress, setETHAddress, setEthProvider, setC
               <Link className="nav-link" aria-current="page" href="/marketplace">MARKETPLACE</Link>
             </li>
             <li className="nav-item">
-              <Link className="nav-link" aria-current="page" href="/addpixie">Add PIXIE</Link>
+              <Link className="nav-link" aria-current="page" href="/addpixie">ADD PIXIE</Link>
             </li>
             <li className="nav-item">
               <Link className="nav-link" aria-current="page" href="/gamestart">GAME</Link>

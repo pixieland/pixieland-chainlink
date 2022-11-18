@@ -27,8 +27,13 @@ export default function AddPixie({ ethaddress, contractNFT }) {
         onStoredChunk: bytes => console.log(`> 🛰 sent ${bytes.toLocaleString()} bytes to web3.storage`)
       })
 
-      console.log(`https://dweb.link/ipfs/${cid}`);
-      seturl(`https://dweb.link/ipfs/${cid}`);
+      const cidurl = `https://dweb.link/ipfs/${cid}/${image.name}`;
+      console.log(cidurl);
+      seturl(cidurl);
+
+      const transaction = await contractNFT.addImage(cidurl);
+      const tx = await transaction.wait();
+      console.log(tx);
     }
     catch(err) {
       console.error(err);
