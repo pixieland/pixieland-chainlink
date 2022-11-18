@@ -1,7 +1,7 @@
 import * as THREE from 'three'
 import { useFrame, useThree } from '@react-three/fiber';
 import React, { useRef, useMemo, useEffect, useState } from 'react';
-import { useTexture, Sphere, MeshWobbleMaterial } from '@react-three/drei'
+import { useTexture, Sphere, Box, MeshWobbleMaterial } from '@react-three/drei'
 import { Attractor, CapsuleCollider, CuboidCollider, RigidBody, useRapier, Physics, InstancedRigidBodies, BallCollider } from "@react-three/rapier"
 
 export const levels = [
@@ -102,12 +102,11 @@ export default function Tube({ level = 1, speed = .1 }) {
         <Physics gravity={[0, -30, 0]} colliders={false}>
             <ambientLight intensity={0.75} />
 
-            <ImageFrame image={image} position={[0, 0, -990]} scale={[.01, .01, .01]} speed={.0005} />
+            <ImageFrame image={image} position={[0, 0, -990]} scale={[.01, .01, .01]} speed={.00005} />
             <Log image={image} offset={-tube_half} speed={speed} rotation={[-190, 31, 0]} />
 
-            {/* <Ball color="red" position={[0, 20, -800]} />
-            <Ball color="red" position={[0, 20, -800]} />
-            <Ball color="red" position={[0, 20, -800]} /> */}
+            <BallRoller image={image} offset={-tube_half} speed={speed}
+                position={[-20, -20, -1990]} />
         </Physics>
     )
 }
@@ -135,6 +134,62 @@ function Ball({ color, ...props }) {
         </RigidBody>
     )
 }
+export const BallRoller = ({ image, count = 20, offset, start = Array.from(Array(count).keys()), ramps = Array.from(Array(100).keys()), ...props }) => {
+    const floor = useRef()
+    const ramp = useTexture("img/log.png");
+    const [balls, setBalls] = useState(start)
+
+    useFrame(({ mouse, viewport }, elapsedTime) => {
+        floor.current.position.z = THREE.MathUtils.lerp(floor.current.position.z, floor.current.position.z + 10, tube_speed)
+        //floor.current.rotation.y += 0.01
+
+        if (floor.current.position.z % 2 < .5) {
+            setBalls(Array.from(Array(count).keys()))
+        }
+
+        if (floor.current.position.z > tube_half) {
+            floor.current.position.z = offset
+        }
+    })
+
+    return (
+        <group ref={floor} {...props}>
+
+            <RigidBody
+                colliders="cuboid"
+                type="fixed">
+                <Box args={[40, -.5, 3000]} position={[18, -1.5, 950]}>
+                    <meshStandardMaterial map={ramp} />
+                </Box>
+            </RigidBody>
+
+            {ramps.map((i) => (
+                <RigidBody
+                    key={i}
+                    colliders="cuboid"
+                    type="fixed">
+                    <Box args={[20, .5, 14]} position={[18, -1.5, i * 20]}
+                        rotation={[(Math.PI / 20) * (i % 2 == 0 ? 1 : -1), 0, 0]}>
+                        <meshStandardMaterial map={ramp} />
+                    </Box>
+                </RigidBody>
+            ))}
+
+            {balls.map((i) => (
+                <RigidBody
+                    key={i}
+                    colliders="ball"
+                    position={[i * 3, 10, 10]}
+                    angularDamping={i / (Math.random() * 10)}
+                >
+                    <Sphere scale={[2,2,2]}>
+                        <meshStandardMaterial color="yellow" />
+                    </Sphere>
+                </RigidBody>
+            ))}
+        </group>
+    );
+};
 
 function Valley({ image, offset, speed = .005, ...props }) {
     const tube = useRef()
