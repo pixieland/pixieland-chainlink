@@ -1,5 +1,5 @@
  # Pixieland
- # Metaversal place to buy, sell and trade dynamic digital assets cross chain  
+ ## Metaversal place to buy, sell and trade dynamic digital assets cross chain  
  
  Instructions
  1. Git clone
