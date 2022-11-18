@@ -22,6 +22,7 @@
     "three-custom-shader-material": "^4.0.0",
     "three-noise": "1.1.2",
     "uuid-by-string": "^4.0.0",
+    "web3.storage": "^4.4.0",
     "web3modal": "^1.9.9",
     "wouter": "^2.8.0-alpha.2"
   },

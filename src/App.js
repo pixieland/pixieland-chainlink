@@ -3,6 +3,8 @@ import { Route, Switch } from "wouter";
 import Navbar from "./components/layout/Navbar";
 import Landing from "./views/Landing";
 import Marketplace from './views/Marketplace';
+import GameStart from './views/GameStart';
+import AddPixie from './views/AddPixie';
 import Game from './components/three/Game';
 import React from 'react';
 import './App.css';
@@ -30,9 +32,30 @@ function App() {
         <Navbar
           ethaddress={ethaddress}
           setETHAddress={setETHAddress}
-          setEthProvider={setEthProvider} />
+          setEthProvider={setEthProvider}
+          setContractNFT={setContractNFT} />
           <Landing />
         </>
+      </Route>
+      <Route path="/gamestart">
+        <>
+            <Navbar
+              ethaddress={ethaddress}
+              setETHAddress={setETHAddress}
+              setContractNFT={setContractNFT}
+              setEthProvider={setEthProvider} />
+            <GameStart ethaddress={ethaddress} contractNFT={contractNFT} />
+          </>
+      </Route>
+      <Route path="/addpixie">
+        <>
+            <Navbar
+              ethaddress={ethaddress}
+              setETHAddress={setETHAddress}
+              setContractNFT={setContractNFT}
+              setEthProvider={setEthProvider} />
+            <AddPixie contractNFT={contractNFT} />
+          </>
       </Route>
       <Route path="/pixiland">
          <Pixiland />
