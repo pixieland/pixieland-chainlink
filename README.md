@@ -23,4 +23,4 @@ Next for Pixieland is to deploy on mainnet and make a better game mechanism. Fix
 
 ## Live Website: https://pixieland.netlify.app/
 
-## We used web3.storage to store the Pixie Imaged :  https://github.com/pixieland/pixieland-chainlink/blob/main/src/views/AddPixie.jsx#L20
+## We used web3.storage to store the Pixie Images :  https://github.com/pixieland/pixieland-chainlink/blob/main/src/views/AddPixie.jsx#L20
